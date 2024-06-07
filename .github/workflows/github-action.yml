@@ -32,68 +32,68 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Build Maven Projects
-        run: |
-          mvn clean package -f ./accident/pom.xml
-          mvn clean package -f ./assessment/pom.xml
-          mvn clean package -f ./compensation/pom.xml
-          mvn clean package -f ./statistics/pom.xml
-          mvn clean package -f ./notification/pom.xml
+      # - name: Build Maven Projects
+      #   run: |
+      #     mvn clean package -f ./accident/pom.xml
+      #     mvn clean package -f ./assessment/pom.xml
+      #     mvn clean package -f ./compensation/pom.xml
+      #     mvn clean package -f ./statistics/pom.xml
+      #     mvn clean package -f ./notification/pom.xml
 
       - name: Set lowercase names to use in tags
         run: |
           echo "REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
           echo "REF_NAME=$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
-      - name: Docker Build and push for Accident
-        uses: docker/build-push-action@v4
-        with:
-          context: ./accident
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/${{ env.REPO_NAME }}/accident:latest
-            ghcr.io/${{ env.REPO_NAME }}/accident:${{ env.REF_NAME }}
+      # - name: Docker Build and push for Accident
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ./accident
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: |
+      #       ghcr.io/${{ env.REPO_NAME }}/accident:latest
+      #       ghcr.io/${{ env.REPO_NAME }}/accident:${{ env.REF_NAME }}
             
-      - name: Docker Build and push for Assessment
-        uses: docker/build-push-action@v4
-        with:
-          context: ./assessment
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/${{ env.REPO_NAME }}/assessment:latest
-            ghcr.io/${{ env.REPO_NAME }}/assessment:${{ env.REF_NAME }}
+      # - name: Docker Build and push for Assessment
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ./assessment
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: |
+      #       ghcr.io/${{ env.REPO_NAME }}/assessment:latest
+      #       ghcr.io/${{ env.REPO_NAME }}/assessment:${{ env.REF_NAME }}
             
-      - name: Docker Build and push for Compensation
-        uses: docker/build-push-action@v4
-        with:
-          context: ./compensation
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/${{ env.REPO_NAME }}/compensation:latest
-            ghcr.io/${{ env.REPO_NAME }}/compensation:${{ env.REF_NAME }}
+      # - name: Docker Build and push for Compensation
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ./compensation
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: |
+      #       ghcr.io/${{ env.REPO_NAME }}/compensation:latest
+      #       ghcr.io/${{ env.REPO_NAME }}/compensation:${{ env.REF_NAME }}
             
-      - name: Docker Build and push for Statistics
-        uses: docker/build-push-action@v4
-        with:
-          context: ./statistics
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/${{ env.REPO_NAME }}/statistics:latest
-            ghcr.io/${{ env.REPO_NAME }}/statistics:${{ env.REF_NAME }}
+      # - name: Docker Build and push for Statistics
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ./statistics
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: |
+      #       ghcr.io/${{ env.REPO_NAME }}/statistics:latest
+      #       ghcr.io/${{ env.REPO_NAME }}/statistics:${{ env.REF_NAME }}
             
-      - name: Docker Build and push for Notification
-        uses: docker/build-push-action@v4
-        with:
-          context: ./notification
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/${{ env.REPO_NAME }}/notification:latest
-            ghcr.io/${{ env.REPO_NAME }}/notification:${{ env.REF_NAME }}
+      # - name: Docker Build and push for Notification
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ./notification
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: |
+      #       ghcr.io/${{ env.REPO_NAME }}/notification:latest
+      #       ghcr.io/${{ env.REPO_NAME }}/notification:${{ env.REF_NAME }}
             
 
       - name: Update Kubernetes manifests
